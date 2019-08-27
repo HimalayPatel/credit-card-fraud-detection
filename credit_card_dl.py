@@ -37,11 +37,11 @@ model=Sequential([
 ])
 
 # DNN without sampling
-# model.summary()
-# model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
-# model.fit(X_train,y_train,batch_size=15,epochs=5)
-# score=model.evaluate(X_test,y_test)
-# print(score)
+model.summary()
+model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+model.fit(X_train,y_train,batch_size=15,epochs=5)
+score=model.evaluate(X_test,y_test)
+print(score)
 
 # Confusion Matrix code from sklearn
 import matplotlib.pyplot as plt
@@ -82,53 +82,53 @@ def plot_confusion_matrix(cm, classes,
     plt.tight_layout()
 
 # Confusion Matrix of Test Dataset
-# y_pred = model.predict(X_test)
-# y_test = pd.DataFrame(y_test)
-# cnf_matrix = confusion_matrix(y_test, y_pred.round())
-# print(cnf_matrix)
-# plot_confusion_matrix(cnf_matrix, classes=[0,1])
-# plt.show()
-# Confusion Matrix of whole Dataset
-# y_pred = model.predict(X)
-# y_expected = pd.DataFrame(y)
-# cnf_matrix = confusion_matrix(y_expected, y_pred.round())
-# plot_confusion_matrix(cnf_matrix,classes=[0,1])
-# plt.show()
+y_pred = model.predict(X_test)
+y_test = pd.DataFrame(y_test)
+cnf_matrix = confusion_matrix(y_test, y_pred.round())
+print(cnf_matrix)
+plot_confusion_matrix(cnf_matrix, classes=[0,1])
+plt.show()
+Confusion Matrix of whole Dataset
+y_pred = model.predict(X)
+y_expected = pd.DataFrame(y)
+cnf_matrix = confusion_matrix(y_expected, y_pred.round())
+plot_confusion_matrix(cnf_matrix,classes=[0,1])
+plt.show()
 
 # DNN with Undersampling
-# fraud_indices = np.array(data[data.Class == 1].index)
-# number_records_fraud = len(fraud_indices)
-# print(number_records_fraud)
-# normal_indices=np.array(data[data.Class==0].index)
-# random_normal_indices=np.random.choice(normal_indices,number_records_fraud,replace=False)
-# print(len(random_normal_indices))
-# under_sample_indices=np.concatenate([fraud_indices, random_normal_indices])
-# print(len(under_sample_indices))
-# under_sample_data=data.iloc[under_sample_indices,]
-# X_undersample = under_sample_data.iloc[:,under_sample_data.columns != 'Class']
-# y_undersample = under_sample_data.iloc[:,under_sample_data.columns == 'Class']
-# X_train, X_test, y_train, y_test = train_test_split(X_undersample,y_undersample, test_size=0.3,random_state=0)
-# X_train = np.array(X_train)
-# X_test = np.array(X_test)
-# y_train = np.array(y_train)
-# y_test = np.array(y_test)
-# model.summary()
-# model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
-# model.fit(X_train,y_train,batch_size=15,epochs=5)
-# # Confusion Matrix of Test Dataset
-# y_pred = model.predict(X_test)
-# y_test = pd.DataFrame(y_test)
-# cnf_matrix = confusion_matrix(y_test, y_pred.round())
-# # print(cnf_matrix)
-# plot_confusion_matrix(cnf_matrix, classes=[0,1])
-# plt.show()
-# # Confusion Matrix of whole Dataset
-# y_pred = model.predict(X)
-# y_expected = pd.DataFrame(y)
-# cnf_matrix = confusion_matrix(y_expected, y_pred.round())
-# # print(cnf_matrix)
-# plot_confusion_matrix(cnf_matrix,classes=[0,1])
-# plt.show()
+fraud_indices = np.array(data[data.Class == 1].index)
+number_records_fraud = len(fraud_indices)
+print(number_records_fraud)
+normal_indices=np.array(data[data.Class==0].index)
+random_normal_indices=np.random.choice(normal_indices,number_records_fraud,replace=False)
+print(len(random_normal_indices))
+under_sample_indices=np.concatenate([fraud_indices, random_normal_indices])
+print(len(under_sample_indices))
+under_sample_data=data.iloc[under_sample_indices,]
+X_undersample = under_sample_data.iloc[:,under_sample_data.columns != 'Class']
+y_undersample = under_sample_data.iloc[:,under_sample_data.columns == 'Class']
+X_train, X_test, y_train, y_test = train_test_split(X_undersample,y_undersample, test_size=0.3,random_state=0)
+X_train = np.array(X_train)
+X_test = np.array(X_test)
+y_train = np.array(y_train)
+y_test = np.array(y_test)
+model.summary()
+model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+model.fit(X_train,y_train,batch_size=15,epochs=5)
+# Confusion Matrix of Test Dataset
+y_pred = model.predict(X_test)
+y_test = pd.DataFrame(y_test)
+cnf_matrix = confusion_matrix(y_test, y_pred.round())
+# print(cnf_matrix)
+plot_confusion_matrix(cnf_matrix, classes=[0,1])
+plt.show()
+# Confusion Matrix of whole Dataset
+y_pred = model.predict(X)
+y_expected = pd.DataFrame(y)
+cnf_matrix = confusion_matrix(y_expected, y_pred.round())
+# print(cnf_matrix)
+plot_confusion_matrix(cnf_matrix,classes=[0,1])
+plt.show()
 
 # DNN with Oversampling (SMOTE)
 from imblearn.over_sampling import SMOTE
